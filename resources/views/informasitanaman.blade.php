@@ -16,24 +16,7 @@
 
     <div class=" flex items-center justify-center h-screen w-screen bg-white ">
     <div class="max-w-[1098px] mx-auto rounded-lg overflow-hidden ">
-        <div class="md:flex">
-            <div class="w-full p-3">
-                <div class="relative border-dashed h-[600px] w-[900px] rounded-lg border-dashed border-4 border-color-biru1 bg-color-biru2 flex justify-center items-center">
-
-                  <div class="absolute">
-
-                    <div class="flex flex-col items-center flex">
-                      <img src="{{ asset('gambar/gambardeteksi.png') }}">
-                    <span class="block text-gray-400 font-normal">Drop your files here or 
-                    <button class="text-color-biru1">Browse</button></span>
-                    </div>
-                  </div>
-
-                  <input type="file" class="h-full w-full opacity-0" name="">
-
-                        </div>
-                    </div>
-                </div>
+       
             </div>
         </div>
   </div>
