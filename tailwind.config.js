@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         'color-coklat1': '#6D4C41',
+        'color-coklat2': '#8D6E63',
         'color-biru1': '#38B9FA',
         'color-biru2': '#F6F9FF',
       }
