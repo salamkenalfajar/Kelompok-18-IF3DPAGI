@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\View;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('tes', function() {
+Route::get('halamandeteksi', function() {
     return view('riski');
 });
 Route::get('informasihama', function() {
@@ -14,4 +14,16 @@ Route::get('informasihama', function() {
 });
 Route::get('informasitanaman', function() {
     return view('informasitanaman');
+});
+Route::get('mengelolahama', function() {
+    return view('mengelolahama');
+});
+Route::get('mengelolatanaman', function() {
+    return view('mengelolatanaman');
+});
+Route::get('pengguna', function() {
+    return view('pengguna');
+});
+Route::get('dashboard', function() {
+    return view('dashboard');
 });
