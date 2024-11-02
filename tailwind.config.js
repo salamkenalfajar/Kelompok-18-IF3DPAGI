@@ -12,6 +12,7 @@ export default {
         'color-coklat2': '#8D6E63',
         'color-biru1': '#38B9FA',
         'color-biru2': '#F6F9FF',
+        'color-abu1': '#E9E8E8',
       }
     },
   },
