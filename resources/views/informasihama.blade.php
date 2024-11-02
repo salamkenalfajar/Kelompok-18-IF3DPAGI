@@ -13,7 +13,7 @@
     <div class="drawer-content flex flex-col items-center justify-center">
       <!-- Page content here -->
       <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-        Open drawer
+        Open drawer 
       </label>
       <div class=" flex-1 p-3 ">
         <div class="flex items-center justify-between mb-8 pr-5 pl-1">
