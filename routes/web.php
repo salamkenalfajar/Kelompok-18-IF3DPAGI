@@ -27,6 +27,9 @@ Route::get('pengguna', function() {
 Route::get('dashboard', function() {
     return view('dashboard');
 });
+Route::get('daftar', function() {
+    return view('daftar');
+});
 Route::get('login', function() {
     return view('login');
 });
