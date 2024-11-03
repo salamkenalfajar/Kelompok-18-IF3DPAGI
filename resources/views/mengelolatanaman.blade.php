@@ -40,7 +40,7 @@
           </ul>
     </div>
 
-    <div class="drawer-content flex flex-col py-2 bg-color-abu1">
+    <div class="drawer-content flex flex-col bg-color-abu1">
 
       <div class="navbar bg-base-100 shadow-lg ">
         <div class="flex-1">
@@ -98,6 +98,7 @@
                   </a>
                   <a class="btn btn-ghost hover:bg-transparent">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
+                    
                   </a>
                 </th>
 
@@ -153,6 +154,9 @@
         <label class="input input-bordered flex items-center gap-2">
           Klasifikasi
           <input type="text" class="grow w-80" placeholder="Klasifikasi Tanaman" />
+        </label>
+        <label for="">
+          <input type="file" class="file-input w-full max-w-xs file:bg-color-coklat2 file:text-white" />
         </label>
       </div>
       <div class="modal-action">

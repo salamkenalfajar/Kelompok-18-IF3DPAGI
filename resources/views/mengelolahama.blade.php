@@ -33,7 +33,7 @@
           <li class=" text-color-coklat1 text-2xl  rounded-l-2xl bg-white p-1 ">
             <a href="mengelolatanaman" class="font-semibold"><img class="w-7 h-7" src="{{ asset('Icon/tanaman admin.svg') }}" alt="Tanaman Icon">Tanaman</a>
           </li>
-          <li class=" text-color-coklat1 text-2xl  rounded-l-2xl bg-color-coklat2 p-1 ">
+          <li class=" text-color-white text-2xl  rounded-l-2xl bg-color-coklat2 p-1 ">
             <a href="mengelolahama" class="font-semibold"><img class="w-7 h-7" src="{{ asset('Icon/iconhama.svg') }}" alt="Hama Icon">Hama</a>
           </li>
           <ul class="space-y-2">
@@ -93,7 +93,7 @@
                 <td>Quality Control Specialist</td>
                 <td>Blue</td>
                 <th>
-                  <a class="btn btn-ghost hover:bg-transparent">
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_1.showModal()">
                     <img src="{{ asset('icon/iconpalu.svg') }}" class="#">
                   </a>
                   <a class="btn btn-ghost hover:bg-transparent">
@@ -139,7 +139,34 @@
       </div>
     </div>
   </div>
-
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box w-screen">
+      <div class="gap-2 w-80 p-3 grid">
+        <label class="input input-bordered flex items-center gap-2">
+          Nama
+          <input type="text" class="grow w-80" placeholder="Nama Hama" />
+        </label>
+        <label class="input input-bordered flex items-center gap-2">
+          Deskripsi
+          <input type="text" class="grow w-80" placeholder="Deskripsi" />
+        </label>
+        <label class="input input-bordered flex items-center gap-2">
+          Klasifikasi
+          <input type="text" class="grow w-80" placeholder="Klasifikasi Hama" />
+        </label>
+        <label for="">
+          <input type="file" class="file-input w-full max-w-xs file:bg-color-coklat2 file:text-white" />
+        </label>
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+          <button class="btn">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 
 
 
