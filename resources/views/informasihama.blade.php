@@ -26,42 +26,35 @@
           <input type="text" placeholder="search" class="p-2 border rounded-xl shadow-2xl">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-2/3">
+          @foreach ($hamaa as $hama)
+            
+          
           <!-- Card 1 -->
-          <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_1.showModal()">
+          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_hama{{ $hama->Id_Hama }}').showModal();">
             <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="{{ asset('gambar/serangga padi 1.png') }}" alt="Serangga Padi" class="w-screen h-64 object-cover">
+              <img src="{{ asset('uploads/' . $hama->Gambar) }}" alt="Serangga Padi" class="w-screen h-64 object-cover">
               <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Serangga Padi
+                {{$hama->Nama}}
               </div>
             </div>
           </a>
-          <!-- Card 2 -->
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Hama Bambu" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Hama Bambu
-              </div>
-            </div>
-          </a>
+          <dialog id="my_modal_hama{{$hama->Id_Hama}}" class="modal">
+    <div class="max-h-[50rem] overflow-y-auto w-full max-w-7xl bg-transparent shadow-none rounded-3xl">
+      <img class="w-full max-h-96 object-cover" src="{{ asset('uploads/' . $hama->Gambar) }}">
+      <div class="bg-white px-5 ">
+        <p class="py-4 text-center font-bold text-2xl">{{$hama->Nama}}</p>
+        <p class="py-4 text-left text-xl">{{$hama->Deskripsi}}</p>
+        <div class="modal-action py-5">
+          <form method="dialog">
+            <!-- if there is a button, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
 
-          <!-- Card 3 -->
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Lalat Buah" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Lalat Buah
-              </div>
-            </div>
-          </a>
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Serangga Padi" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Serangga Padi
-              </div>
-            </div>
-          </a>
+    </div>
+  </dialog>
+        @endforeach
 
         </div>
       </div>
@@ -96,28 +89,7 @@
 
     </div>
   </div>
-  <dialog id="my_modal_1" class="modal">
-    <div class="modal-box w-full max-w-7xl bg-transparent shadow-none">
-      <img class="w-full" src="{{ asset('gambar/serangga padi.png') }}">
-      <div class="bg-white px-5 ">
-        <p class="py-4 text-center font-bold text-2xl">Serangga Padi</p>
-        <p class="py-4 text-left text-xl">Serangga padi adalah hama yang
-          sering menyerang tanaman padi, mengakibatkan penurunan produksi.
-          Salah satu hama yang umum adalah wereng coklat (Nilaparvata lugens),
-          yang merusak tanaman dengan menghisap cairan dari batang, menyebabkan
-          tanaman menguning dan mati. Hama lain termasuk penggerek batang padi dan walang sangit.
-          Untuk mengatasi serangga padi, penggunaan pestisida, penanaman varietas tahan hama,
-          serta pengelolaan lingkungan tanam secara terpadu merupakan langkah penting.</p>
-        <div class="modal-action py-5">
-          <form method="dialog">
-            <!-- if there is a button, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
-        </div>
-      </div>
 
-    </div>
-  </dialog>
 </body>
 
 </html>

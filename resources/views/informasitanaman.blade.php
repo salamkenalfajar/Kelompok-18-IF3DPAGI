@@ -27,41 +27,37 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-2/3">
           <!-- Card 1 -->
-          <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_1.showModal()">
+           @foreach ($tanamans as $tanaman )
+             
+        
+          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_tanaman{{ $tanaman->Id_Tanaman }}').showModal();">
             <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="{{ asset('gambar/tomat-1 1.png') }}" alt="Tomat" class="w-screen h-64 object-cover">
+              <img src="{{ asset('uploads/' . $tanaman->Gambar) }}" alt="Tomat" class="w-screen h-64 object-cover">
               <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Tomat
+                {{$tanaman->Nama}}
               </div>
             </div>
           </a>
-          <!-- Card 2 -->
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Hama Bambu" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Hama Bambu
-              </div>
-            </div>
-          </a>
+          <!-- modal info -->
+          <dialog id="my_modal_tanaman{{$tanaman->Id_Tanaman}}" class="modal">
+    <div class="max-h-[50rem] overflow-y-auto w-full max-w-7xl bg-transparent shadow-none rounded-3xl">
+    <img class="w-full max-h-96 object-cover" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
+      <div class="bg-white px-5 ">
+        <p class="py-4 text-center font-bold text-2xl">{{$tanaman->Nama}}</p>
+        <p class="py-4 text-left text-xl">{{$tanaman->Deskripsi}}</p>
+        <div class="modal-action py-5">
+          <form method="dialog">
+            <!-- if there is a button, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
 
-          <!-- Card 3 -->
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Lalat Buah" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Lalat Buah
-              </div>
-            </div>
-          </a>
-          <a class="btn btn-ghost hover:bg-transparent">
-            <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <img src="https://via.placeholder.com/300x200" alt="Serangga Padi" class="w-screen h-64 object-cover">
-              <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
-                Serangga Padi
-              </div>
-            </div>
-          </a>
+    </div>
+  </dialog>
+  <!-- modal info -->
+          @endforeach
+         
 
         </div>
       </div>
@@ -96,29 +92,7 @@
 
     </div>
   </div>
-  <dialog id="my_modal_1" class="modal">
-    <div class="modal-box w-full max-w-7xl bg-transparent shadow-none">
-      <img class="w-full" src="{{ asset('gambar/tomat.png') }}">
-      <div class="bg-white px-5 ">
-        <p class="py-4 text-center font-bold text-2xl">Tomat</p>
-        <p class="py-4 text-left text-xl">Tanaman Tomat (Solanum lycopersicum) adalah tanaman
-          buah yang sangat populer dan banyak
-          dibudidayakan karena nilai ekonomis dan kandungan gizinya yang tinggi.
-          Tomat digunakan dalam berbagai kuliner dan kaya akan
-          vitamin C, A, dan antioksidan seperti likopen yang baik untuk kesehatan.
-          Hama yang umumnya menyerang tomat seperti kutu daun,ulat grayak, dan
-          lalat buat. Tomat merupakan tanaman yang tumbuh optimal dalam kondisi
-          cuaca yang hangat, tetapi tidak ekstrem.</p>
-        <div class="modal-action py-5">
-          <form method="dialog">
-            <!-- if there is a button, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </dialog>
+ 
 </body>
 
 </html>
