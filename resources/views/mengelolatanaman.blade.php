@@ -40,7 +40,7 @@
           </ul>
     </div>
 
-    <div class="drawer-content flex flex-col py-2 bg-color-abu1">
+    <div class="drawer-content flex flex-col  bg-color-abu1">
 
       <div class="navbar bg-base-100 shadow-lg ">
         <div class="flex-1">
@@ -91,9 +91,15 @@
               <!-- row 1 -->
               <tr>
                 <th>{{ $index + 1 }}</th>
-                <td>{{$tanaman->Nama}}</td>
-                <td>{{$tanaman->Deskripsi}}</td>
-                <td>{{$tanaman->Klasifikasi}}</td>
+                <td>
+                  <a class="w-40 truncate">{{$tanaman->Nama}}</a>
+                </td>
+                <td>
+                  <p class="w-40 truncate ">{{$tanaman->Deskripsi}}</p>
+                </td>
+                <td>
+                  <p class="w-40 truncate">{{$tanaman->Klasifikasi}}</p>
+                </td>
                 <th>
                   <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_edit{{ $tanaman->Id_Tanaman }}').showModal();">
                     <img src="{{ asset('icon/iconpalu.svg') }}" class="#">
@@ -131,19 +137,19 @@
         <div class="gap-4 w-full p-3 grid">
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Nama</span>
-                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" value="{{$tanaman->Nama}}" />
+                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" value="{{$tanaman->Nama}}" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Klasifikasi</span>
-                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" value="{{$tanaman->Klasifikasi}}" />
+                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" value="{{$tanaman->Klasifikasi}}" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman" />
+                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman"  />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
-                <input type="text"  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" value="{{$tanaman->Deskripsi}}" />
+                <textarea  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" rows="4"  required >{{$tanaman->Deskripsi}}</textarea>
             </label>
         </div>
 
@@ -172,26 +178,26 @@
   <dialog id="my_modal_tambah" class="modal">
     <div class="modal-box w-full max-w-lg mx-auto">
         <h2 class="text-xl font-semibold border-b pb-2 mb-4">Tambah Data Tanaman</h2>
-        <fo rm action="{{ route('mengelolatanaman.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('mengelolatanaman.store') }}" method="POST" enctype="multipart/form-data">
             @csrf 
             <div class="gap-4 w-full p-3 grid">
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Nama</span>
-                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" />
+                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Klasifikasi</span>
-                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" />
+                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman"  required  />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman" />
+                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman"   required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
-                <input type="text"  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" />
+                <textarea name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" rows="4" required></textarea>
             </label>
-        </div>
+            </div>
             <div class="modal-action">
                 <button type="button" class="btn" onclick="document.getElementById('my_modal_tambah').close();">Close</button>
                 <button type="submit" class=" btn bg-green-600 text-white ">Confirm</button>
@@ -206,7 +212,11 @@
   
   <!-- Modal Hapus -->
 
-
+  @if(session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
 
 
 </body>

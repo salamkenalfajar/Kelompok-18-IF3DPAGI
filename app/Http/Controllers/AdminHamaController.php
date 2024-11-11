@@ -34,7 +34,7 @@ class AdminHamaController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'klasifikasi' => 'required|string|max:255',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:10000',
             'deskripsi' => 'required|string',
         ]);
 
@@ -80,7 +80,7 @@ class AdminHamaController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'klasifikasi' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:10000',
             'deskripsi' => 'required|string',
         ]);
     

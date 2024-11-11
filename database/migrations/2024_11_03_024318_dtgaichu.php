@@ -16,7 +16,7 @@ return new class extends Migration
         $table->string('Nama', 100);
         $table->string('Gambar', 100)->nullable();
         $table->string('Klasifikasi', 100);
-        $table->string('Deskripsi', 100);
+        $table->text('Deskripsi');
         $table->timestamps();
        });
 
@@ -25,7 +25,7 @@ return new class extends Migration
         $table->string('Nama', 100);
         $table->string('Gambar', 100)->nullable();
         $table->string('Klasifikasi', 100);
-        $table->string('Deskripsi', 100);
+        $table->text('Deskripsi');
         $table->timestamps();
        });
      

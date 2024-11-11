@@ -90,9 +90,15 @@
               <!-- row 1 -->
               <tr>
                 <th>{{ $index + 1 }}</th>
-                <td>{{$hama->Nama}}</td>
-                <td>{{$hama->Deskripsi}}</td>
-                <td>{{$hama->Klasifikasi}}</td>
+                <td>
+                  <p class="w-40 truncate">{{$hama->Nama}}</p>
+                </td>
+                <td>
+                  <p class="w-40 truncate">{{$hama->Deskripsi}}</p>
+                </td>
+                <td>
+                  <p class="w-40 truncate">{{$hama->Klasifikasi}}</p>
+                </td>
                 <th>
                   <a class="btn btn-ghost hover:bg-transparent">
                     <img src="{{ asset('icon/iconpalu.svg') }}" class="#" onclick="document.getElementById('my_modal_edit{{ $hama->Id_Hama}}').showModal();" >
@@ -132,11 +138,11 @@
         <div class="gap-4 w-full p-3 grid">
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Nama</span>
-                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" value="{{$hama->Nama}}" />
+                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" value="{{$hama->Nama}}" required/>
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Klasifikasi</span>
-                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" value="{{$hama->Klasifikasi}}" />
+                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" value="{{$hama->Klasifikasi}}" required/>
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
@@ -144,7 +150,7 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
-                <input type="text"  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" value="{{$hama->Deskripsi}}" />
+                <textarea  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" required >{{$hama->Deskripsi}}</textarea>
             </label>
         </div>
 
@@ -178,19 +184,19 @@
             <div class="gap-4 w-full p-3 grid">
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Nama</span>
-                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" />
+                <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Hama"  required/>
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Klasifikasi</span>
-                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" />
+                <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Hama" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman" />
+                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Hama" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
-                <input type="text"  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" />
+                <textarea  name="deskripsi" class="input input-bordered w-full" placeholder="Deskripsi" rows="4" required ></textarea>
             </label>
         </div>
             <div class="modal-action">
@@ -203,7 +209,11 @@
    <!-- Modal Tambah -->
 
 
-
+   @if(session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
 
 </body>
 
