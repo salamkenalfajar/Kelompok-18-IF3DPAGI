@@ -172,7 +172,7 @@
   <dialog id="my_modal_tambah" class="modal">
     <div class="modal-box w-full max-w-lg mx-auto">
         <h2 class="text-xl font-semibold border-b pb-2 mb-4">Tambah Data Tanaman</h2>
-        <fo rm action="{{ route('mengelolatanaman.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('mengelolatanaman.store') }}" method="POST" enctype="multipart/form-data">
             @csrf 
             <div class="gap-4 w-full p-3 grid">
             <label class="flex flex-col gap-1">
