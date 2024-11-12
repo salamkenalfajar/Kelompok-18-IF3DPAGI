@@ -22,8 +22,8 @@ class AuthController extends Controller
         try {
             // Validasi input pengguna
             $validatedData = $request->validate([
-                'username' => 'required|string|max:255|unique:users,username',  // Validasi username unik
-                'email' => 'required|email|unique:users,email',  // Validasi email unik
+                'username' => 'required|string|max:255|unique:users,username',  
+                'email' => 'required|email|unique:users,email',  
                 'password' => [
                     'required',
                     'string',
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.',
             ]);
 
-            Log::info('Validation successful', $validatedData); // Log jika validasi berhasil
+            Log::info('Validation successful', $validatedData); 
 
             // Membuat pengguna baru
             $user = User::create([
@@ -45,12 +45,12 @@ class AuthController extends Controller
                 'password' => Hash::make($validatedData['password']),
                 'is_admin' => false,
             ]);
-            Log::info('User created successfully', ['user_id' => $user->id]); // Log jika pengguna berhasil dibuat
+            Log::info('User created successfully', ['user_id' => $user->id]); 
 
-            // Redirect ke halaman login dengan pesan sukses
+            
             return redirect()->route('login')->with('status', 'Registration successful! You can now log in.');
         } catch (\Exception $e) {
-            // Tangkap error dan tampilkan pesan di log
+            
             Log::error('Error during registration: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'Something went wrong during registration']);
         }
