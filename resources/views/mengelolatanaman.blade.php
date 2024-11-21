@@ -156,7 +156,7 @@
           <input type="text" class="grow w-80" placeholder="Klasifikasi Tanaman" />
         </label>
         <label for="">
-          <input type="file" class="file-input w-full max-w-xs file:bg-color-coklat2 file:text-white" />
+          <input type="file" class="file-input w-full  file:bg-color-coklat2 file:text-white file-input-bordered" />
         </label>
       </div>
       <div class="modal-action">

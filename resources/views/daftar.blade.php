@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title>Login</title>
+    <title>Daftar</title>
     <style>
         .bg-login {
             background-image: url('/gambar/bglogin.jpg');
@@ -17,13 +17,14 @@
     <div class="h-screen bg-login w-screen flex justify-center items-center">
         <div class="bg-white w-7/12 h-[35rem] flex justify-center shadow-lg">
             <div class="navbar bg-base-100 absolute w-7/12">
-                <div class="navbar-start hidden lg:flex">
+                <div class="navbar-start">
+                    
                     <ul class="menu menu-horizontal px-1 text-color-coklat2">
                         <li>
                             <img width="55" src="{{ asset('Icon/image 3.svg') }}">
                         </li>
                         <li><a>Home</a></li>
-                        <li><a>Login</a></li>
+                        <li><a href="login">Login</a></li>
                         <li><a>Daftar</a></li>
                     </ul>
                 </div>

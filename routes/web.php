@@ -33,3 +33,9 @@ Route::get('daftar', function() {
 Route::get('login', function() {
     return view('login');
 });
+Route::get('pricing', function() {
+    return view('pricing');
+});
+Route::get('home', function() {
+    return view('home');
+});
