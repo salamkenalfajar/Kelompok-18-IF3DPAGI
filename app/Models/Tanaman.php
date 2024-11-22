@@ -10,6 +10,7 @@ class Tanaman extends Model
     use HasFactory;
     protected $table = 'infotanaman';
     protected $primaryKey = 'Id_Tanaman';
+    protected $keyType = 'int';
     protected $fillable = [
         'nama',
         'klasifikasi',

@@ -10,6 +10,7 @@ class hama extends Model
     use HasFactory;
     protected $table = 'infohama';
     protected $primaryKey = 'Id_Hama';
+    protected $keyType = 'int'; 
     protected $fillable = [
         'nama',
         'klasifikasi',

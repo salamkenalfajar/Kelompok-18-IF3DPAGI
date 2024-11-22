@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
-
+  @vite(['resources/js/app.js', 'resources/css/app.css'])
   <title>Mengelola Informasi hama</title>
+  
 </head>
 
 
 <body>
+
   <div class="drawer lg:drawer-open">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
 
@@ -40,7 +41,7 @@
           </ul>
     </div>
 
-    <div class="drawer-content flex flex-col py-2 bg-color-abu1">
+    <div class="drawer-content flex flex-col  bg-color-abu1">
 
       <div class="navbar bg-base-100 shadow-lg ">
         <div class="flex-1">
@@ -110,19 +111,19 @@
 
               </tr>
                <!-- Modal Hapus -->
-  <dialog id="my_modal_delete{{$hama->Id_Hama}}" class="modal">
+        <dialog id="my_modal_delete{{$hama->Id_Hama}}" class="modal">
             <div class="modal-box">
               <h3 class="font-bold text-lg">Hello!</h3>
               <p class="py-4">Apakah anda yakin ingin menghapus ?</p>
               <div class="modal-action">
-              <button type="button" class="btn" onclick="document.getElementById('my_modal_delete{{$hama->Id_Hama}}').close();">Cancel</button>
+              <button type="button" class="btn" onclick="document.getElementById('my_modal_delete{{$hama->Id_Hama}}').close();">Tutup</button>
              <form method="POST" action="{{route ('mengelolahama.destroy', $hama->Id_Hama)}}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn bg-red-600 text-white">Delete</button>
+                <button type="submit" class="btn bg-red-600 text-white">Hapus</button>
               </div>
             </div>
-</form>
+        </form>
            
           </dialog>
   <!-- Modal Hapus -->
@@ -146,7 +147,7 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman" />
+                <input type="file" name="gambar" class="file-input file-input-bordered w-full  file:bg-color-coklat2"/>
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
@@ -158,8 +159,8 @@
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
-          <button type="button" class="btn" onclick="document.getElementById('my_modal_edit{{$hama->Id_Hama}}').close();">Close</button>
-          <button class="btn bg-green-600 text-white" type="submit">Confirm</button>
+          <button type="button" class="btn" onclick="document.getElementById('my_modal_edit{{$hama->Id_Hama}}').close();">Tutup</button>
+          <button class="btn bg-green-600 text-white" type="submit">Edit</button>
         </form>
       </div>
         </form>
@@ -192,7 +193,7 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Hama" required />
+                <input type="file" name="gambar" class="file-input file-input-bordered w-full  file:bg-color-coklat2" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
@@ -200,19 +201,64 @@
             </label>
         </div>
             <div class="modal-action">
-                <button type="button" class="btn" onclick="document.getElementById('my_modal_tambah').close();">Close</button>
-                <button type="submit" class=" btn bg-green-600 text-white ">Confirm</button>
+                <button type="button" class="btn" onclick="document.getElementById('my_modal_tambah').close();">Tutup</button>
+                <button type="submit" class=" btn bg-green-600 text-white ">Tambah</button>
             </div>
         </form>
     </div>
 </dialog>
    <!-- Modal Tambah -->
 
+   @if (session()->has('success'))
+<div id="toast"
+    class="z-[100] fixed top-10 w-7/12 bg-green-50 border-s-4 border-green-500 p-4 transition-all duration-500 rounded-md"
+    role="alert" tabindex="-1" aria-labelledby="hs-bordered-red-style-label">
+    <div class="flex">
+        <div class="shrink-0">
+            <!-- Icon -->
+            <span
+                class="inline-flex justify-center items-center size-8 rounded-full border-4 border-green-100 bg-green-200 text-green-800 dark:border-green-900 dark:bg-green-800 dark:text-green-400">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                </svg>
+            </span>
+            <!-- End Icon -->
+        </div>
+        <div class="ms-3">
+            <h3 id="hs-bordered-green-style-label" class="text-gray-800 font-semibold">
+                Berhasil!
+            </h3>
+            <p class="text-sm text-gray-700">
+                {{ session('success')}}
+            </p>
+        </div>
+    </div>
+</div>
 
-   @if(session('success'))
-    <script>
-        alert("{{ session('success') }}");
-    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toastElement = document.getElementById('toast');
+
+        if (toastElement) {
+            toastElement.classList.remove('opacity-0', 'translate-y-0');
+            toastElement.classList.add('opacity-100', 'translate-y-10');
+
+            setTimeout(function() {
+                toastElement.classList.remove('opacity-100', 'translate-y-10');
+                toastElement.classList.add('opacity-0', 'translate-y-0');
+
+                setTimeout(function() {
+                    toastElement.remove();
+                }, 5000);
+            }, 5000);
+        }
+    });
+</script> 
+
 @endif
 
 </body>

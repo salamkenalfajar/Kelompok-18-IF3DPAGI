@@ -26,11 +26,12 @@
           <input type="text" placeholder="search" class="p-2 border rounded-xl shadow-2xl">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-2/3">
+          
           @foreach ($hamaa as $hama)
             
           
           <!-- Card 1 -->
-          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_hama{{ $hama->Id_Hama }}').showModal();">
+          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_hama{{ $hama->Nama }}').showModal();">
             <div class="relative overflow-hidden rounded-lg shadow-lg">
               <img src="{{ asset('uploads/' . $hama->Gambar) }}" alt="Serangga Padi" class="w-screen h-64 object-cover">
               <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
@@ -38,7 +39,7 @@
               </div>
             </div>
           </a>
-          <dialog id="my_modal_hama{{$hama->Id_Hama}}" class="modal">
+          <dialog id="my_modal_hama{{$hama->Nama}}" class="modal">
     <div class="max-h-[50rem] overflow-y-auto w-full max-w-7xl bg-transparent shadow-none rounded-3xl">
       <img class="w-full max-h-96 object-cover" src="{{ asset('uploads/' . $hama->Gambar) }}">
       <div class="bg-white px-5 ">

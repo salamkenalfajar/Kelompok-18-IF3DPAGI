@@ -32,7 +32,7 @@ class AdminHamaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|max:255|unique:infohama,Nama',
             'klasifikasi' => 'required|string|max:255',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:10000',
             'deskripsi' => 'required|string',
@@ -52,9 +52,9 @@ class AdminHamaController extends Controller
             $infohama->Gambar = $filename;
 
          }
-                $infohama->save();
-                return redirect()->route('mengelolahama.index')->with('success', 'Data hama berhasil ditambahkan.');
-            }
+          $infohama->save();
+          return redirect()->route('mengelolahama.index')->with('success', 'Data hama berhasil ditambahkan.');
+          }
 
     /**
      * Display the specified resource.

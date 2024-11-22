@@ -128,10 +128,10 @@
   <!-- Modal Hapus -->
    <!-- Modal edit-->
 
-   <dialog id="my_modal_edit{{$tanaman->Id_Tanaman}}" class="modal">
+   <dialog id="my_modal_edit{{$tanaman->Id_Tanaman }}" class="modal">
     <div class="modal-box w-full max-w-lg mx-auto">
         <h2 class="text-xl font-semibold border-b pb-2 mb-4">Edit Data Tanaman</h2>
-        <form action="{{route ('mengelolatanaman.update', $tanaman->Id_Tanaman)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route ('mengelolatanaman.update', $tanaman->Id_Tanaman )}}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
         <div class="gap-4 w-full p-3 grid">
@@ -145,7 +145,7 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman"  />
+                <input type="file" name="gambar" class="file-input file-input-bordered w-full  file:bg-color-coklat2" />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
@@ -191,7 +191,7 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Gambar</span>
-                <input type="file"  name="gambar" class="input input-bordered w-full" placeholder="Gambar Tanaman"   required />
+                <input type="file" name="gambar" class="file-input file-input-bordered w-full  file:bg-color-coklat2" required />
             </label>
             <label class="flex flex-col gap-1">
                 <span class="font-medium">Deskripsi</span>
@@ -211,11 +211,17 @@
   <!-- Modal Hapus -->
   
   <!-- Modal Hapus -->
-
-  @if(session('success'))
-    <script>
-        alert("{{ session('success') }}");
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 1500
+        });
+</script>
 @endif
 
 

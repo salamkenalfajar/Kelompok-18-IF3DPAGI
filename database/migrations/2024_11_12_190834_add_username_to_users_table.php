@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Menambahkan kolom 'username' setelah kolom 'id'
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->unique()->after('id');
-        });
+        // // Menambahkan kolom 'username' setelah kolom 'id'
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('username')->unique()->after('id');
+        // });
     }
 
     /**
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Menghapus kolom 'username' ketika rollback
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
-        });
+        // // Menghapus kolom 'username' ketika rollback
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->dropColumn('username');
+        // });
     }
 };
