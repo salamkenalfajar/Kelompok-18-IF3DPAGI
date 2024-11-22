@@ -66,10 +66,28 @@
             </ul>
           </div>
         </div>
-
       </div>
+<!-- search -->
+<div class="mb-2 mt-6 mr-10 flex justify-end">
+          <form action="{{ route('mengelolahama.index') }}" method="GET" class="flex items-center p-2 bg-white border rounded-xl w-auto">
+                <div class="relative flex-grow">
+                    <svg class="absolute top-1/2 left-3 transform -translate-y-1/2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" 
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" 
+                              d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <input type="text" name="cari" value="{{ $pencarian ?? '' }}" placeholder="Cari Informasi Hama" 
+                          class=" p-2 pl-10 outline-none rounded-l-xl w-96" />
+                    </div>
+                <button type="submit" 
+                        class="p-2 bg-color-coklat2 text-white rounded-r-xl hover:bg-color-coklat1 transition duration-300">
+                    Search
+                </button>
+            </form>
+        </div>
 
 
+<!-- search -->
       <div class="p-10">
         <div class=" w-full col-span-2 shadow-lg text-lg bg-white">
           <div class="flex justify-between p-5 border-b-2 items-center text-2xl font-medium">
@@ -87,6 +105,16 @@
               </tr>
             </thead>
             <tbody>
+              @if ($hamaa->isEmpty())
+              <tr>
+                <td colspan="4">
+              <div class="flex justify-center items-center h-64">
+              <p class="text-center text-lg font-medium">Informasi Hama tidak ditemukan.</p>
+              </div>
+                </td>
+              </tr>
+              @else
+              
             @foreach ($hamaa as $index => $hama)
               <!-- row 1 -->
               <tr>
@@ -168,6 +196,7 @@
   </dialog>
    <!-- Modal edit-->
   @endforeach
+  @endif
             </tbody>
           </table>
         </div>

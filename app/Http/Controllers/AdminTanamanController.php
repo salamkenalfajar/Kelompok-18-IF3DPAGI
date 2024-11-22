@@ -11,10 +11,16 @@ class AdminTanamanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tanamans = Tanaman::all();
-        return view('mengelolatanaman', compact('tanamans'));
+        $pencarian = $request->input('cari');
+        if($pencarian){
+            $tanamans = Tanaman::where('nama', 'like', '%' . $pencarian . '%')->get();
+        } else {
+            $tanamans = Tanaman::all();
+        }
+        
+        return view('mengelolatanaman', compact('tanamans', 'pencarian'));
     }
 
     /**

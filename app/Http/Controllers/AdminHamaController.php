@@ -12,10 +12,16 @@ class AdminHamaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hamaa= Hama::all();
-        return view('mengelolahama', compact('hamaa'));
+        $pencarian = $request->input('cari');
+        if($pencarian){
+            $hamaa = Hama::where('nama', 'like', '%'. $pencarian . '%')->get();
+        } else {
+            $hamaa= Hama::all();
+        }
+        
+        return view('mengelolahama', compact('hamaa', 'pencarian'));
     }
 
     /**

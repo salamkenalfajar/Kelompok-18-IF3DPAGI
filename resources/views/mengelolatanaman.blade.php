@@ -65,9 +65,28 @@
             </ul>
           </div>
         </div>
-
       </div>
 
+      <div class="mb-2 mt-6 mr-10 flex justify-end">
+          <form action="{{ route('mengelolatanaman.index') }}" method="GET" class="flex items-center p-2 bg-white border rounded-xl w-auto">
+                <div class="relative flex-grow">
+                    <svg class="absolute top-1/2 left-3 transform -translate-y-1/2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" 
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" 
+                              d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <input type="text" name="cari" value="{{ $pencarian ?? '' }}" placeholder="Cari Informasi Hama" 
+                          class="w-96 p-2 pl-10 outline-none rounded-l-xl" />
+                    </div>
+                <button type="submit" 
+                        class="p-2 bg-color-coklat2 text-white rounded-r-xl hover:bg-color-coklat1 transition duration-300">
+                    Search
+                </button>
+            </form>
+        </div>
+
+
+<!-- search -->
 
       <div class="p-10">
         <div class=" w-full col-span-2 shadow-lg text-lg bg-white">
@@ -86,6 +105,17 @@
               </tr>
             </thead>
             <tbody>
+              @if ($tanamans->isEmpty())
+              <tr>
+                <td colspan="4">
+              <div class="flex justify-center items-center h-64">
+              <p class="text-center text-lg font-medium">Informasi Tanaman tidak ditemukan.</p>
+              </div>
+                </td>
+              </tr>
+              @else
+                
+            
               @foreach ($tanamans as $index => $tanaman)
               
               <!-- row 1 -->
@@ -166,6 +196,7 @@
   </dialog>
    <!-- Modal edit-->
               @endforeach
+              @endif
             </tbody>
           </table>
         </div>
