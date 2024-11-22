@@ -142,7 +142,7 @@
                 <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Tanaman" value="{{$hama->Nama}}" required/>
             </label>
             <label class="flex flex-col gap-1">
-                <span class="font-medium">Klasifikasi</span>
+                <span class="font-medium">Klasifikasi Ilmiah</span>
                 <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Tanaman" value="{{$hama->Klasifikasi}}" required/>
             </label>
             <label class="flex flex-col gap-1">
@@ -188,7 +188,7 @@
                 <input type="text" name="nama" class="input input-bordered w-full" placeholder="Nama Hama"  required/>
             </label>
             <label class="flex flex-col gap-1">
-                <span class="font-medium">Klasifikasi</span>
+                <span class="font-medium">Klasifikasi Ilmiah</span>
                 <input type="text"  name="klasifikasi" class="input input-bordered w-full" placeholder="Klasifikasi Hama" required />
             </label>
             <label class="flex flex-col gap-1">

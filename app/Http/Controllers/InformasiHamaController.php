@@ -9,10 +9,18 @@ class InformasiHamaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-         $hamaa= Hama::all();
-        return view('informasihama', compact('hamaa'));
+        $pencarian = $request->input('cari');
+
+        if($pencarian){
+            $hamaa = Hama::where('nama', 'like', '%'. $pencarian . '%')->get();
+        } else {
+            $hamaa= Hama::all();
+        }
+
+    
+        return view('informasihama', compact('hamaa', 'pencarian'));
     }
 
     /**
