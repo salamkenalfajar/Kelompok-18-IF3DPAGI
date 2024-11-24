@@ -97,7 +97,9 @@
                   </a>
                   <a class="btn btn-ghost hover:bg-transparent">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
-                    
+                  </a>
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_2.showModal()">
+                    <img src="{{ asset('icon/detail.svg') }}" class="#">
                   </a>
                 </th>
 
@@ -163,6 +165,34 @@
           <!-- if there is a button in form, it will close the modal -->
           <button class="btn">Close</button>
           <button class="btn">Confirm</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="my_modal_2" class="modal">
+    <div class="modal-box">
+      <div class="h-screen">
+        <h3 class="text-lg font-bold border-b-2">Detail Tanaman</h3>
+        <h3 class="text-lg font-bold mt-5 mb-4">Nama Tanaman</h3>
+        <p>Tomat</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Deskripsi</h3>
+        <p>Tanaman Tomat (Solanum lycopersicum) adalah tanaman
+          buah yang sangat populer dan banyak
+          dibudidayakan karena nilai ekonomis dan kandungan gizinya yang tinggi.
+          Tomat digunakan dalam berbagai kuliner dan kaya akan
+          vitamin C, A, dan antioksidan seperti likopen yang baik untuk kesehatan.
+          Hama yang umumnya menyerang tomat seperti kutu daun,ulat grayak, dan
+          lalat buat. Tomat merupakan tanaman yang tumbuh optimal dalam kondisi
+          cuaca yang hangat, tetapi tidak ekstrem.</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Klasifikasi</h3>
+        <p>Solanum lycopersicum</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Gambar</h3>
+        <img class="object-contain " width="695" src="{{ asset('gambar/tomat-1 1.png') }}">
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn -translate-y-[1rem]">Close</button>
         </form>
       </div>
     </div>
