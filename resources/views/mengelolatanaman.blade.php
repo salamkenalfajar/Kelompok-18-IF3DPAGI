@@ -137,6 +137,9 @@
                   <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_delete{{ $tanaman->Id_Tanaman }}').showModal();">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
                   </a>
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_detail{{ $tanaman->Id_Tanaman}}').showModal();">
+                    <img src="{{ asset('icon/detail.svg') }}" class="#">
+                  </a>
                 </th>
 
               </tr>
@@ -195,6 +198,27 @@
     </div>
   </dialog>
    <!-- Modal edit-->
+   <!-- Modal Detail-->
+   <dialog id="my_modal_detail{{$tanaman->Id_Tanaman}}" class="modal">
+    <div class="modal-box max-h-screen overflow-y-auto">
+        <h3 class="text-lg font-bold border-b-2">Detail Informasi Hama</h3>
+        <h3 class="text-lg font-bold mt-5 mb-4">Nama Tanaman</h3>
+        <p>{{$tanaman->Nama}}</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Deskripsi</h3>
+        <p>{{$tanaman->Deskripsi}}</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Klasifikasi</h3>
+        <p>{{$tanaman->Klasifikasi}}</p>
+        <h3 class="text-lg font-bold mt-5 mb-4">Gambar</h3>
+        <img class="object-contain" width="695" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
+        <div class="modal-action">
+            <form method="dialog">
+                <!-- Close button -->
+                <button class="btn" onclick="document.getElementById('my_modal_detail{{$tanaman->Id_Tanaman}}').close();">Close</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+   <!-- Modal Detail-->
               @endforeach
               @endif
             </tbody>

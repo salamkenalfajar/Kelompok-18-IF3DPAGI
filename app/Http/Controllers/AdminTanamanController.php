@@ -37,7 +37,7 @@ class AdminTanamanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255|unique:infohama,Nama',
+            'nama' => 'required|string|max:255|unique:infotanaman,Nama',
             'klasifikasi' => 'required|string|max:255',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:10000',
             'deskripsi' => 'required|string',
