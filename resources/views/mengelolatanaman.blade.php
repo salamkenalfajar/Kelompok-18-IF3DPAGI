@@ -99,7 +99,7 @@
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
                   </a>
                   <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_2.showModal()">
-                    <img src="{{ asset('icon/detail.svg') }}" class="#">
+                    <img src="{{ asset('icon/detail.svg') }}" class="-translate-y-[0.3rem]" width="35">
                   </a>
                 </th>
 
@@ -117,6 +117,9 @@
                   <a class="btn btn-ghost hover:bg-transparent">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
                   </a>
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_2.showModal()">
+                    <img src="{{ asset('icon/detail.svg') }}" class="-translate-y-[0.3rem]" width="35">
+                  </a>
                 </th>
               </tr>
               <!-- row 3 -->
@@ -131,6 +134,9 @@
                   </a>
                   <a class="btn btn-ghost hover:bg-transparent">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
+                  </a>
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_2.showModal()">
+                    <img src="{{ asset('icon/detail.svg') }}" class="-translate-y-[0.3rem]" width="35">
                   </a>
                 </th>
               </tr>
