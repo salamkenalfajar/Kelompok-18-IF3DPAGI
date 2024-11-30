@@ -6,11 +6,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class UserMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->is_role == 1 || Auth::user()->is_role == 1)) {
+        if (Auth::check() && Auth::user()->is_role == 0) {
             return $next($request);
         }
 

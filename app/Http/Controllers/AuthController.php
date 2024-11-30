@@ -1,126 +1,65 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function showRegisterForm()
+    public function daftar()
     {
-        return view('auth.register');
+        return view('auth.daftar');  
     }
 
-    public function register(Request $request)
+    public function daftar_post(Request $request)
     {
-        Log::info('Register function started');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|', // Validasi password dengan konfirmasi
+        ]);
 
-        try {
-            // Validasi input pengguna
-            $validatedData = $request->validate([
-                'username' => 'required|string|max:255|unique:users,username',  
-                'email' => 'required|email|unique:users,email',  
-                'password' => [
-                    'required',
-                    'string',
-                    'min:8',
-                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', // Huruf besar, kecil, dan angka
-                ],
-            ], [
-                'username.unique' => 'Username sudah digunakan. Silakan pilih username lain.',
-                'email.unique' => 'Email sudah terdaftar. Silakan pilih email lain.',
-                'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.',
-            ]);
+        // Buat user baru
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->is_role = 0; 
+        $user->remember_token = Str::random(50);
+        $user->save();
 
-            Log::info('Validation successful', $validatedData); 
-
-            // Membuat pengguna baru
-            $user = User::create([
-                'username' => $validatedData['username'],
-                'email' => $validatedData['email'],
-                'password' => Hash::make($validatedData['password']),
-                'is_admin' => false,
-            ]);
-            Log::info('User created successfully', ['user_id' => $user->id]); 
-
-            
-            return redirect()->route('login')->with('status', 'Registration successful! You can now log in.');
-        } catch (\Exception $e) {
-            
-            Log::error('Error during registration: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Something went wrong during registration']);
-        }
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 
-    public function showLoginForm()
+    public function login()
     {
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login_post(Request $request)
     {
-        $validatedData = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        $credentials = $request->only('name', 'password');
 
-        if (Auth::attempt(['username' => $validatedData['username'], 'password' => $validatedData['password']])) {
-            $request->session()->regenerate();
-
-        
-            Log::info('Login successful for user: ' . Auth::user()->username);
-
-
-            if (Auth::user()->is_admin) {
-                return redirect()->route('pengguna');
+        if (Auth::attempt($credentials, true)) {
+            // Cek role setelah berhasil login
+            if (Auth::user()->is_role == 2) {
+                return redirect()->route('admin.dashboard');
+            } elseif (Auth::user()->is_role == 1) {
+                return redirect()->route('admin.dashboard');
+            } elseif (Auth::user()->is_role == 0) {
+                return redirect()->route('user.halamandeteksi');
             }
-
-            return redirect()->route('halamandeteksi');
         }
 
-        Log::warning('Login failed for username: ' . $validatedData['username']);
-
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+        return redirect()->back()->with('error', 'Invalid credentials!');
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'You have logged out!');
     }
-
-    public function createAdmin()
-    {
-        $admin = User::create([
-            'username' => 'admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'is_admin' => true,
-        ]);
-
-        return "Admin created successfully";
-    }
-
-
-    public function checkUsername(Request $request)
-{
-    $usernameExists = User::where('username', $request->username)->exists();
-    return response()->json(['exists' => $usernameExists]);
-}
-
-// Menambahkan metode untuk cek email
-public function checkEmail(Request $request)
-{
-    $emailExists = User::where('email', $request->email)->exists();
-    return response()->json(['exists' => $emailExists]);
-}
-
 }
