@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+      },
       colors: {
         'color-coklat1': '#6D4C41',
         'color-coklat2': '#8D6E63',

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminTanamanController;
 use App\Http\Controllers\AdminHamaController;
+use App\Http\Controllers\DeteksiTanamanController;
 use App\Http\Controllers\InformasiTanamanController;
 use App\Http\Controllers\InformasiHamaController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,12 @@ Route::get('/', function () {
 });
 
 
-Route::get('halamandeteksi', function() {
-    return view('riski');
-})->name('halamandeteksi');
+// Route::get('halamandeteksi', function() {return view('deteksitanaman');
+// })->name('halamandeteksi');
+
+// Route::resource('deteksi', DeteksiTanamanController::class);
+Route::get('/d', [DeteksiTanamanController::class, 'index'])->name('deteksi.index');
+Route::post('/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload');
 
 
 Route::resource('mengelolatanaman', AdminTanamanController::class);
