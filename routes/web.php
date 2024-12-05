@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminTanamanController;
 use App\Http\Controllers\AdminHamaController;
 use App\Http\Controllers\InformasiTanamanController;
 use App\Http\Controllers\InformasiHamaController;
+use App\Http\Controllers\DeteksiTanamanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -15,10 +16,13 @@ Route::get('/', function () {
 });
 
 
-Route::get('halamandeteksi', function() {
-    return view('riski');
-})->name('halamandeteksi');
+// Route::get('halamandeteksi', function() {
+//     return view('riski');
+// })->name('halamandeteksi');
 
+
+Route::get('/d', [DeteksiTanamanController::class, 'index'])->name('deteksi.index');
+Route::post('/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload');
 
 Route::resource('mengelolatanaman', AdminTanamanController::class);
 Route::resource('mengelolahama', AdminHamaController::class);
@@ -62,5 +66,11 @@ Route::get('pengguna', function() {
 
 Route::get('dashboard', function() {
     return view('dashboard');
+});
+Route::get('pricing', function() {
+    return view('pricing');
+});
+Route::get('home', function() {
+    return view('home');
 });
 

@@ -77,7 +77,7 @@
                               d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                     </svg>
                     <input type="text" name="cari" value="{{ $pencarian ?? '' }}" placeholder="Cari Informasi Hama" 
-                          class=" p-2 pl-10 outline-none rounded-l-xl w-96" />
+                          class="pl-10 outline-none rounded-l-xl w-96" />
                     </div>
                 <button type="submit" 
                         class="p-2 bg-color-coklat2 text-white rounded-r-xl hover:bg-color-coklat1 transition duration-300">

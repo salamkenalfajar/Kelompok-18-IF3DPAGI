@@ -89,7 +89,7 @@
     </div>
     <div class="bg-color-coklat1 drawer-side h-screen">
       <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul class="menu text-base-content text-white w-80 p-4">
+      <ul class="menu text-white w-80 p-4">
 
         <!-- Sidebar content here -->
         <div class="flex justify-between items-center pb-14">
@@ -110,7 +110,7 @@
         </li>
       </ul>
       <div class="dropdown dropdown-top gap-5">
-        <div class="avatar pl-8 pt-4 fixed bottom-0 translate-y-[30rem]">
+        <div class="avatar pl-8 pt-4 fixed bottom-0 translate-y-[35rem]">
           <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
             <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">

@@ -78,7 +78,7 @@
                           class="w-96 p-2 pl-10 outline-none rounded-l-xl" />
                     </div>
                 <button type="submit" 
-                        class="p-2 bg-color-coklat2 text-white rounded-r-xl hover:bg-color-coklat1 transition duration-300">
+                        class="min-h-12 bg-color-coklat2 text-white rounded-r-xl hover:bg-color-coklat1 transition duration-300">
                     Search
                 </button>
             </form>
@@ -136,10 +136,7 @@
                   <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_delete{{ $tanaman->Id_Tanaman }}').showModal();">
                     <img src="{{ asset('icon/icontong.svg') }}" class="#">
                   </a>
-                  <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_detail{{ $tanaman->Id_Tanaman}}').showModal();">
-                    <img src="{{ asset('icon/detail.svg') }}" class="#">
-                  </a>
-                  <a class="btn btn-ghost hover:bg-transparent" onclick="my_modal_2.showModal()">
+                  <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_detail{{ $tanaman->Id_Tanaman}}').showModal()">
                     <img src="{{ asset('icon/detail.svg') }}" class="-translate-y-[0.3rem]" width="35">
                   </a>
                 </th>
@@ -257,7 +254,7 @@
             </div>
             <div class="modal-action">
                 <button type="button" class="btn" onclick="document.getElementById('my_modal_tambah').close();">Close</button>
-                <button type="submit" class=" btn bg-green-600 text-white ">Confirm</button>
+                <button type="submit" class=" btn bg-color-coklat2 text-white ">Confirm</button>
             </div>
         </form>
     </div>
