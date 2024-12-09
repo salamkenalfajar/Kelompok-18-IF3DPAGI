@@ -7,6 +7,8 @@
   @vite('resources/css/app.css')
   <link rel="stylesheet" href="https://horizon-ui.com/shadcn-nextjs-boilerplate/_next/static/css/12f72a06cf11dcdf.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Halaman Deteksi</title>
 </head>
 
 <body>
@@ -47,7 +49,7 @@
               </button>
               </div>
 <!-- Preview Hasil -->
-              <div id="result" class="flex w-full mt-6 hidden">
+              <div id="result" class="hidden w-full mt-6">
                             <div
                                 class="mr-5 flex h-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full bg-zinc-950 border border-zinc-800">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
@@ -58,7 +60,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg></div>
                             <div
-                                class="rounded-lg border-4 shadow-sm flex !max-h-max p-5 !px-[22px] !py-[22px] text-base font-normal leading-6 text-black backdrop-blur-xl text-black md:text-base md:leading-[26px]">
+                                class="rounded-lg border-4 shadow-sm flex !max-h-max p-5 !px-[22px] !py-[22px] text-base font-normal leading-6 text-black backdrop-blur-xl md:text-base md:leading-[26px]">
                                 <div class=" font-normal">
                                     <!-- <p><strong>Hasil Deteksi</strong></p> -->
                                     <p>&nbsp;</p>
@@ -90,7 +92,7 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="bg-color-coklat1 drawer-side h-screen ">
+    <div class="bg-color-coklat1 drawer-side h-screen">
       <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu text-white w-80 p-4">
         <!-- Sidebar content here -->
@@ -122,6 +124,7 @@
   <!-- JavaScript untuk Logika -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+    // Elemen-elemen DOM
         const uploadInput = document.getElementById('image-upload');
         const uploadArea = document.getElementById('upload-area');
         const detectButton = document.getElementById('detect-btn');
@@ -130,12 +133,36 @@
         const resultImage = document.getElementById('result-image');
         const retryButton = document.getElementById('retry-btn');
         const deleteButton = document.getElementById('delete-btn');
+        const uploadedPreview = document.createElement('img'); // Elemen untuk menampilkan gambar yang diunggah
 
+        uploadedPreview.classList.add('max-w-full', 'rounded-lg', 'hidden', 'mb-4'); // Tambahkan kelas gaya
+        uploadArea.parentNode.insertBefore(uploadedPreview, uploadArea.nextSibling); // Sisipkan di bawah form upload
+
+        //Fungsi untuk mengetikkan teks satu per satu
+        function typeText(element, text, delay = 5 ){
+          return new Promise((resolve) => {
+            element.innerHTML = ""; // Mengosongkan elemen sebelum mengetik
+            let index = 0;
+
+            function type() {
+            if (index < text.length) {
+              element.innerHTML += text[index]; // Tambahkan huruf satu per satu
+              index++;
+              setTimeout(type, delay); // Tunda sesuai waktu delay
+            } else {
+              resolve();
+            }
+          }
+             type(); // Mulai mengetik
+            });          
+      
+        }
 
         //Alert Unggah Gambar
         uploadInput.addEventListener('change', () => {
           const file = uploadInput.files[0];
           if (file) {
+            //Menampilkan alert sukses jika gambar berhasil diunggah
             Swal.fire({
               position: "center",
               icon: "success",
@@ -144,13 +171,27 @@
               timer: 1500
               
             });
-            // Tampilkan tombol Hapus Gambar
-            deleteButton.classList.remove('hidden');
-          }
+
+            
+            const reader = new FileReader();
+                reader.onload = function (e) {
+                    uploadedPreview.src = e.target.result; // Setel sumber gambar dari file yang diunggah
+                    uploadedPreview.classList.remove('hidden'); // Tampilkan gambar
+                    uploadArea.classList.add('hidden'); // Sembunyikan form upload
+                    deleteButton.classList.remove('hidden'); // Tampilkan tombol hapus
+                };
+                reader.readAsDataURL(file); // Baca file gambar sebagai URL
+            }
         });
+
+        // Alert hapus gambar
         deleteButton.addEventListener('click', () => {
             uploadInput.value = ''; // Kosongkan input file
+            uploadedPreview.src = ''; // Kosongkan sumber gambar
+            uploadedPreview.classList.add('hidden'); // Sembunyikan gambar pratinjau
+            uploadArea.classList.remove('hidden'); // Tampilkan form upload kembali
             deleteButton.classList.add('hidden'); // Sembunyikan tombol Hapus Gambar
+            // Tampilkan alert sukses untuk hapus gambar
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -160,9 +201,11 @@
             });
         });
 
+        // Alert deteksi gambar
         detectButton.addEventListener('click', async () => {
             const file = uploadInput.files[0];
             if (!file) {
+              //Alert jika tidak ada gambar yang diunggah
                  Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -173,7 +216,7 @@
 
             const formData = new FormData();
             formData.append('image', file);
-// Efek loading ke deteksi
+            // Efek loading ke deteksi
             Swal.fire({
                 title: "Sedang memproses...",
                 html: "Harap tunggu, gambar anda sedang dianalisis.",
@@ -182,14 +225,16 @@
                     Swal.showLoading(); // Tampilkan animasi loading
                 },
             });
-//  Efek loading ke deteksi
+
+
             try {
+              // Mengirim permintaan ke server untuk mendeteksi gambar
                 const response = await fetch("{{ route('deteksi.upload') }}", {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', //Token CSRF untuk keamanan
                     },
-                    body: formData,
+                    body: formData, //Gambar yang diunggah
                 });
 
                 const result = await response.json();
@@ -197,38 +242,58 @@
                 if (response.ok) {
                     Swal.close(); // Tutup loading setelah proses selesai
                    // Proses hasil deteksi dan formatkan menjadi terstruktur
-                    const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
+                    // const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
                     resultText.innerHTML = ""; // Kosongkan kontainer hasil sebelumnya
-
-                    sections.forEach((section) => {
-                        if (section.trim()) {
-                            const headerEnd = section.indexOf(":");
-                            const header = section.substring(0, headerEnd).trim(); // Header
-                            const content = section.substring(headerEnd + 1).trim(); // Konten
-
-                            // Tambahkan header
-                            const headerElement = document.createElement("h3");
-                            headerElement.textContent = header;
-                            headerElement.classList.add("font-bold", "mb-2", "text-lg");
-                            resultText.appendChild(headerElement);
-
-                            // Tambahkan konten
-                            const contentElement = document.createElement("p");
-                            contentElement.textContent = content;
-                            contentElement.classList.add("text-gray-700", "mb-4");
-                            resultText.appendChild(contentElement);
-                        }
-                    });
 
                     resultImage.src = result.image_url; // URL gambar yang diunggah
                     resultImage.classList.remove('hidden'); // Pastikan gambar terlihat
                     resultDiv.classList.remove('hidden'); // Tampilkan hasil deteksi
-// Sembunyikan tombol
+
+                    // FUngsi untuk menampilkan hasil deteksi dengan efek mengetik
+                    async function displaySections(sections) {
+                      for (const section of sections) {
+                          if (section.trim()) {
+                              const headerEnd = section.indexOf(":");
+                              const header = section.substring(0, headerEnd).trim(); // Header
+                              const content = section.substring(headerEnd + 1).trim(); // Konten
+
+                              //Hapus tanda bintang dari header dan konten
+                              const cleanHeader = header.replace(/\*\*/g, "");
+                              const cleanContent = content.replace(/\*\*/g, "");
+
+                              // Tambahkan header dengan efek mengetik
+                              const headerElement = document.createElement("h3");
+                              headerElement.classList.add( "font-bold", "mb-2", "text-lg");
+                              resultText.appendChild(headerElement);
+
+                              await typeText(headerElement, cleanHeader, 10);
+
+                              // Tambahkan konten dengan efek mengetik
+                              const contentElement = document.createElement("p");
+                              contentElement.classList.add("font-roboto", "text-black", "mb-4", 'font-medium');
+                              resultText.appendChild(contentElement);
+
+                              await typeText(contentElement, cleanContent, 4);
+
+                              // Jeda sebelum menampilkan bagian berikutnya
+                              await new Promise(resolve => setTimeout(resolve, 300));
+                          }
+                      }
+                  }
+
+                // Split hasil berdasarkan "- **" dan tampilkan bagian satu per satu
+                const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
+                displaySections(sections);
+                    
+                   
+                // Sembunyikan tombol
                     detectButton.classList.add('hidden');
                     uploadArea.classList.add('hidden');
+                    uploadedPreview.classList.add('hidden');
                     deleteButton.classList.add('hidden');
                     retryButton.classList.remove('hidden');
                 } else {
+                  //Alert jika terjadi error pada server
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -236,6 +301,7 @@
                     });
                 }
             } catch (error) {
+              // Alert jika terjadi error pada koneksi
                 console.error('Error:', error);
                 Swal.fire({
                     icon: "error",
@@ -245,7 +311,9 @@
             }
         });
 
+        // Event listener untuk tombol coba deteksi lagi
         retryButton.addEventListener('click', () => {
+          //Alert coba deteksi lagi
           Swal.fire({
                 position: "center",
                 icon: "info",
@@ -263,6 +331,7 @@
             retryButton.classList.add('hidden'); // Sembunyikan tombol Retry
             detectButton.classList.remove('hidden'); // Tampilkan tombol Deteksi
             uploadArea.classList.remove('hidden'); // Tampilkan Form Upload
+            uploadedPreview.classList.add('hidden'); // Sembunyikan gambar pratinjau
             deleteButton.classList.add('hidden'); // Sembunyikan tombol Hapus Gambar
             },1500);
         });
