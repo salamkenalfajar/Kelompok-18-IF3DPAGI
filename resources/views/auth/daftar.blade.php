@@ -6,17 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>Daftar</title>
-    <style>
-        .bg-login {
-            background-image: url('/gambar/bglogin.jpg');
-        }
-    </style>
 </head>
 
 <body>
-    <div class="h-screen bg-login w-screen flex justify-center items-center">
-        <div class="bg-white w-7/12 h-[35rem] flex justify-center shadow-lg">
-            <div class="navbar bg-base-100 absolute w-7/12">
+    <div class="h-screen bg-white w-screen flex justify-center items-center">
+        <div class="bg-white w-7/12 h-[35rem] flex justify-center shadow-2xl relative border-2">
+            <div class= "absolute w-7/12 top -4 left-4 z-50">
                 <div class="navbar-start">
                     <ul class="menu menu-horizontal px-1 text-color-coklat2">
                       <img width="30" src="{{ asset('Icon/image 3.svg') }}" alt="Logo" class="object-contain">
@@ -52,13 +47,13 @@
 
                 <form action="{{ route('daftar.post') }}" method="POST">
                     @csrf
-                    <label class="input input-bordered flex items-center gap-2">
+                    <label class="input input-bordered flex items-center gap-2 mb-2 bg-white border-2">
                         <input type="email" name="email" class="grow" placeholder="Email" required />
                     </label>
-                    <label class="input input-bordered flex items-center gap-2">
+                    <label class="input input-bordered flex items-center gap-2 mb-2 bg-white border-2">
                         <input type="text" name="name" class="grow" placeholder="Username" required />
                     </label>
-                    <label class="input input-bordered flex items-center gap-2">
+                    <label class="input input-bordered flex items-center gap-2 mb-2 bg-white border-2">
                         <input type="password" name="password" id="password" class="grow" placeholder="Password" required />
                         <button type="button" onclick="togglePasswordVisibility('password')" class="text-gray-500 focus:outline-none">👁️</button>
                     </label>

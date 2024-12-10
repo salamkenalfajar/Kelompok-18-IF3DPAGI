@@ -106,11 +106,11 @@
           <a href="informasitanaman" class="font-light"><img class="w-7 h-7" src="{{ asset('Icon/icontanaman.svg') }}">Tanaman</a>
         </li>
         <li class=" rounded-lg text-white text-3xl hover:bg-color-coklat2 active:bg-color-coklat2 focus:outline-none focus:ring focus:ring-bg-color-coklat2">
-          <a href="halamandeteksi" class="font-light"><img class="w-7 h-7" src="{{ asset('Icon/icondeteksi.svg') }}">Deteksi</a>
+          <a href="d" class="font-light"><img class="w-7 h-7" src="{{ asset('Icon/icondeteksi.svg') }}">Deteksi</a>
         </li>
       </ul>
       <div class="dropdown dropdown-top gap-5">
-        <div class="avatar pl-8 pt-4 fixed bottom-0 translate-y-[35rem]">
+        <div class="avatar pl-8 pb-4 fixed bottom-0 translate-y-[30rem]">
           <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
             <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">

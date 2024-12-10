@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use iLluminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 
 class DeteksiTanamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = Auth::user();
+
+        if ($user->membership == 'premium' && $user->membership_expiry < now()) {
+            $user->membership = 'free';
+            $user->membership_expiry = null;
+            $user->save();
+        }
+
         return view('user/halamandeteksi');
     }
 
@@ -66,7 +76,8 @@ class DeteksiTanamanController extends Controller
         ], 500);
     }
 }
-
+ 
+    
     /**
      * Display the specified resource.
      */

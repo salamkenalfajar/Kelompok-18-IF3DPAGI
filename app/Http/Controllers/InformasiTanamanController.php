@@ -18,7 +18,7 @@ class InformasiTanamanController extends Controller
             $tanamans = Tanaman::all();
         }
         
-        return view('user.informasitanaman', compact('tanamans','pencarian'));
+        return view('user/informasitanaman', compact('tanamans','pencarian'));
     }
 
     /**

@@ -12,14 +12,13 @@
     <title>Pricing</title>
 </head>
 
-
 <body>
     <!-- component -->
-<section class="bg-color-coklat2 from-color-coklat1 to-indigo-900 py-12 h-screen ">
+<section class="bg-color-coklat2 from-color-coklat1 to-indigo-900 py-12 h-screen">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-4xl font-extrabold text-white sm:text-5xl">
-        Pilih Harga Membership
+        MEMBERSHIP
       </h2>
       <p class="mt-4 text-xl text-white">
         Berlangganan Membership Untuk Membuka Fitur Baru
@@ -39,7 +38,7 @@
           <p class="mt-4 text-white">Cocok digunakan untuk 1 orang.</p>
         </div>
         <div class="mb-8">
-          <span class="text-5xl font-extrabold text-white">Rp 100rb</span>
+          <span class="text-5xl font-extrabold text-white">Rp 50rb</span>
           <span class="text-xl font-medium text-white">/bln</span>
         </div>
         <ul class="mb-8 space-y-4 text-white">
@@ -72,8 +71,17 @@
           Berlangganan
       </a>
       </div>
-      
     </div>
+
+    <!-- Button Kembali ke Halaman Deteksi -->
+    <div class="mt-8 text-center">
+      <li class="rounded-lg text-white text-3xl hover:bg-color-coklat2 active:bg-color-coklat2 focus:outline-none focus:ring focus:ring-bg-color-coklat2">
+        <a href="user/d" class="font-light flex items-center justify-center">
+          <img class="w-7 h-7 mr-2" src="{{ asset('Icon/icondeteksi.svg') }}" alt="Icon Deteksi">Deteksi
+        </a>
+      </li>
+    </div>
+    
   </div>
 </section>
 </body>

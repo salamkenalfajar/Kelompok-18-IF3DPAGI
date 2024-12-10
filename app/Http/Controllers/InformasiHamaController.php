@@ -21,7 +21,7 @@ class InformasiHamaController extends Controller
         }
 
         
-            return view('user.informasihama', compact('hamaa', 'pencarian'));
+            return view('user/informasihama', compact('hamaa', 'pencarian'));
         
     }
 

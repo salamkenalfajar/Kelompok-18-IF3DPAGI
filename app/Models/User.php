@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_role',
-        'membership'
+        'membership',
+        'membership_expiry'
     ];
 
     /**

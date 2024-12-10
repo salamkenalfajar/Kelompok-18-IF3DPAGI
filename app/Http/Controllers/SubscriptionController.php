@@ -14,6 +14,7 @@ class SubscriptionController extends Controller
 
         // Perbarui status berlangganan
         $user->membership = 'premium';
+        $user->membership_expiry = now()->addMonth();
         $user->save();
 
         return response()->json(['message' => 'Status berlangganan berhasil diperbarui.']);

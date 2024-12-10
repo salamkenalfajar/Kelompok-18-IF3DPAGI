@@ -7,6 +7,8 @@
   @vite('resources/css/app.css')
   <link rel="stylesheet" href="https://horizon-ui.com/shadcn-nextjs-boilerplate/_next/static/css/12f72a06cf11dcdf.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Halaman Deteksi</title>
 </head>
 
 <body>
@@ -19,7 +21,7 @@
       </label>
 
       <div class="flex items-center justify-center min-h-screen w-full bg-white pt-12 ">
-        <div class="max-w-[1098px] mx-auto rounded-lg overflow-hidden">
+        <div class="max-w-[1098px] max-h-screen mx-auto rounded-lg overflow-y-auto overflow-x-hidden">
           <div class="md:flex">
             <div class="w-full p-3">
               <!-- Area Upload -->
@@ -90,16 +92,16 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="bg-color-coklat1 drawer-side h-screen ">
+    <div class="bg-color-coklat1 drawer-side h-full ">
       <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu text-white w-80 p-4">
         <!-- Sidebar content here -->
         <div class="flex justify-between items-center pb-14">
           <div class="flex items-center gap-x-2">
-            <img class="w-6 h-6" src="{{ asset('Icon/image 3.svg') }}">
+            <img class="w-8 h-8" src="{{ asset('Icon/image 3.svg') }}">
             <h1 class="text-white text-2xl font-semibold"> Gaichu </h1>
           </div>
-          <button><img class="w-5 h-5" src="{{ asset('Icon/Vector.svg') }}"></button>
+          <button><img class="w-6 h-6" src="{{ asset('Icon/Vector.svg') }}"></button>
         </div>
         <li class="text-white text-3xl">
           <a href="informasihama" class="font-light"><img class="w-7 h-7" src="{{ asset('Icon/iconhama.svg') }}">Hama</a>
@@ -112,20 +114,20 @@
         </li>
       </ul>
       <div class="dropdown dropdown-top gap-5">
-       <div class="avatar pl-4 pb-4 fixed bottom-0">
+      <div class="avatar pl-8 pb-4 fixed bottom-0 translate-y-[30rem]">
         <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
           <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <li><a href="/pricing">Membership</a></li>
+            <li><a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a></li>
             <li>
-              <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+              <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
             </li>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf
             </form>
-          </ul>  
+          </ul>
         </div>
-       </div>
+      </div>
       </div>
     </div>
   </div>
@@ -133,6 +135,7 @@
   <!-- JavaScript untuk Logika -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+    // Elemen-elemen DOM
         const uploadInput = document.getElementById('image-upload');
         const uploadArea = document.getElementById('upload-area');
         const detectButton = document.getElementById('detect-btn');
@@ -141,12 +144,36 @@
         const resultImage = document.getElementById('result-image');
         const retryButton = document.getElementById('retry-btn');
         const deleteButton = document.getElementById('delete-btn');
+        const uploadedPreview = document.createElement('img'); // Elemen untuk menampilkan gambar yang diunggah
 
+        uploadedPreview.classList.add('max-w-full', 'rounded-lg', 'hidden', 'mb-4'); // Tambahkan kelas gaya
+        uploadArea.parentNode.insertBefore(uploadedPreview, uploadArea.nextSibling); // Sisipkan di bawah form upload
+
+        //Fungsi untuk mengetikkan teks satu per satu
+        function typeText(element, text, delay = 5 ){
+          return new Promise((resolve) => {
+            element.innerHTML = ""; // Mengosongkan elemen sebelum mengetik
+            let index = 0;
+
+            function type() {
+            if (index < text.length) {
+              element.innerHTML += text[index]; // Tambahkan huruf satu per satu
+              index++;
+              setTimeout(type, delay); // Tunda sesuai waktu delay
+            } else {
+              resolve();
+            }
+          }
+             type(); // Mulai mengetik
+            });          
+      
+        }
 
         //Alert Unggah Gambar
         uploadInput.addEventListener('change', () => {
           const file = uploadInput.files[0];
           if (file) {
+            //Menampilkan alert sukses jika gambar berhasil diunggah
             Swal.fire({
               position: "center",
               icon: "success",
@@ -155,13 +182,27 @@
               timer: 1500
               
             });
-            // Tampilkan tombol Hapus Gambar
-            deleteButton.classList.remove('hidden');
-          }
+
+            
+            const reader = new FileReader();
+                reader.onload = function (e) {
+                    uploadedPreview.src = e.target.result; // Setel sumber gambar dari file yang diunggah
+                    uploadedPreview.classList.remove('hidden'); // Tampilkan gambar
+                    uploadArea.classList.add('hidden'); // Sembunyikan form upload
+                    deleteButton.classList.remove('hidden'); // Tampilkan tombol hapus
+                };
+                reader.readAsDataURL(file); // Baca file gambar sebagai URL
+            }
         });
+
+        // Alert hapus gambar
         deleteButton.addEventListener('click', () => {
             uploadInput.value = ''; // Kosongkan input file
+            uploadedPreview.src = ''; // Kosongkan sumber gambar
+            uploadedPreview.classList.add('hidden'); // Sembunyikan gambar pratinjau
+            uploadArea.classList.remove('hidden'); // Tampilkan form upload kembali
             deleteButton.classList.add('hidden'); // Sembunyikan tombol Hapus Gambar
+            // Tampilkan alert sukses untuk hapus gambar
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -171,9 +212,11 @@
             });
         });
 
+        // Alert deteksi gambar
         detectButton.addEventListener('click', async () => {
             const file = uploadInput.files[0];
             if (!file) {
+              //Alert jika tidak ada gambar yang diunggah
                  Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -184,7 +227,7 @@
 
             const formData = new FormData();
             formData.append('image', file);
-// Efek loading ke deteksi
+            // Efek loading ke deteksi
             Swal.fire({
                 title: "Sedang memproses...",
                 html: "Harap tunggu, gambar anda sedang dianalisis.",
@@ -193,14 +236,16 @@
                     Swal.showLoading(); // Tampilkan animasi loading
                 },
             });
-//  Efek loading ke deteksi
+
+
             try {
+              // Mengirim permintaan ke server untuk mendeteksi gambar
                 const response = await fetch("{{ route('deteksi.upload') }}", {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', //Token CSRF untuk keamanan
                     },
-                    body: formData,
+                    body: formData, //Gambar yang diunggah
                 });
 
                 const result = await response.json();
@@ -208,38 +253,58 @@
                 if (response.ok) {
                     Swal.close(); // Tutup loading setelah proses selesai
                    // Proses hasil deteksi dan formatkan menjadi terstruktur
-                    const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
+                    // const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
                     resultText.innerHTML = ""; // Kosongkan kontainer hasil sebelumnya
-
-                    sections.forEach((section) => {
-                        if (section.trim()) {
-                            const headerEnd = section.indexOf(":");
-                            const header = section.substring(0, headerEnd).trim(); // Header
-                            const content = section.substring(headerEnd + 1).trim(); // Konten
-
-                            // Tambahkan header
-                            const headerElement = document.createElement("h3");
-                            headerElement.textContent = header;
-                            headerElement.classList.add("font-bold", "mb-2", "text-lg");
-                            resultText.appendChild(headerElement);
-
-                            // Tambahkan konten
-                            const contentElement = document.createElement("p");
-                            contentElement.textContent = content;
-                            contentElement.classList.add("text-gray-700", "mb-4");
-                            resultText.appendChild(contentElement);
-                        }
-                    });
 
                     resultImage.src = result.image_url; // URL gambar yang diunggah
                     resultImage.classList.remove('hidden'); // Pastikan gambar terlihat
                     resultDiv.classList.remove('hidden'); // Tampilkan hasil deteksi
-// Sembunyikan tombol
+
+                    // FUngsi untuk menampilkan hasil deteksi dengan efek mengetik
+                    async function displaySections(sections) {
+                      for (const section of sections) {
+                          if (section.trim()) {
+                              const headerEnd = section.indexOf(":");
+                              const header = section.substring(0, headerEnd).trim(); // Header
+                              const content = section.substring(headerEnd + 1).trim(); // Konten
+
+                              //Hapus tanda bintang dari header dan konten
+                              const cleanHeader = header.replace(/\*\*/g, "");
+                              const cleanContent = content.replace(/\*\*/g, "");
+
+                              // Tambahkan header dengan efek mengetik
+                              const headerElement = document.createElement("h3");
+                              headerElement.classList.add( "font-bold", "mb-2", "text-lg");
+                              resultText.appendChild(headerElement);
+
+                              await typeText(headerElement, cleanHeader, 10);
+
+                              // Tambahkan konten dengan efek mengetik
+                              const contentElement = document.createElement("p");
+                              contentElement.classList.add("font-roboto", "text-black", "mb-4", 'font-medium');
+                              resultText.appendChild(contentElement);
+
+                              await typeText(contentElement, cleanContent, 4);
+
+                              // Jeda sebelum menampilkan bagian berikutnya
+                              await new Promise(resolve => setTimeout(resolve, 300));
+                          }
+                      }
+                  }
+
+                // Split hasil berdasarkan "- **" dan tampilkan bagian satu per satu
+                const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
+                displaySections(sections);
+                    
+                   
+                // Sembunyikan tombol
                     detectButton.classList.add('hidden');
                     uploadArea.classList.add('hidden');
+                    uploadedPreview.classList.add('hidden');
                     deleteButton.classList.add('hidden');
                     retryButton.classList.remove('hidden');
                 } else {
+                  //Alert jika terjadi error pada server
                   Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -247,6 +312,7 @@
                     });
                 }
             } catch (error) {
+              // Alert jika terjadi error pada koneksi
                 console.error('Error:', error);
                 Swal.fire({
                     icon: "error",
@@ -256,7 +322,9 @@
             }
         });
 
+        // Event listener untuk tombol coba deteksi lagi
         retryButton.addEventListener('click', () => {
+          //Alert coba deteksi lagi
           Swal.fire({
                 position: "center",
                 icon: "info",
@@ -274,6 +342,7 @@
             retryButton.classList.add('hidden'); // Sembunyikan tombol Retry
             detectButton.classList.remove('hidden'); // Tampilkan tombol Deteksi
             uploadArea.classList.remove('hidden'); // Tampilkan Form Upload
+            uploadedPreview.classList.add('hidden'); // Sembunyikan gambar pratinjau
             deleteButton.classList.add('hidden'); // Sembunyikan tombol Hapus Gambar
             },1500);
         });

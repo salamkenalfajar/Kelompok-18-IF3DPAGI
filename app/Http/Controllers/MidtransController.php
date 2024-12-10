@@ -36,6 +36,7 @@ class MidtransController extends Controller
         if ($transactionStatus == 'capture' || $transactionStatus == 'settlement') {
             // Pembayaran berhasil, ubah status menjadi premium
             $user->membership = 'premium';
+            $user->membership_expiry = now()->addMonth();
             $user->save();
 
             return response()->json(['message' => 'Subscription updated to premium'], 200);
