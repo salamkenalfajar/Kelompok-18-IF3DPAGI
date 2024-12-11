@@ -35,7 +35,7 @@ Route::resource('admin/mengelolahama', AdminHamaController::class)->middleware('
 // Route::get('/user/halamandeteksi', [DeteksiTanamanController::class, 'index'])->name('deteksi.index')->middleware('user.only');
 // Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware('user.only');
 Route::get('/user/d', [DeteksiTanamanController::class, 'index'])->name('deteksi.index')->middleware('user.only');
-Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware('user.only');
+Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware(['user.only', 'limit.detection']);
 Route::resource('user/informasitanaman', InformasiTanamanController::class)->middleware('user.only');
 Route::resource('user/informasihama', InformasiHamaController::class)->middleware('user.only');
 Route::post('/payment', [PaymentController::class, 'createTransaction'])->name('payment.create')->middleware('user.only');

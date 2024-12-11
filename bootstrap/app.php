@@ -26,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest.only' => \App\Http\Middleware\GuestMiddleware::class,
             'admin.only' => \App\Http\Middleware\AdminMiddleware::class,
             'user.only' => \App\Http\Middleware\UserMiddleware::class,
+            'limit.detection' => \App\Http\Middleware\LimitDetection::class,
             'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         ]);
