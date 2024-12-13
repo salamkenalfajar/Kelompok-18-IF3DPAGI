@@ -92,7 +92,7 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="bg-color-coklat1 drawer-side h-screen ">
+    <div class="bg-color-coklat1 drawer-side h-full ">
       <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu text-white w-80 p-4">
         <!-- Sidebar content here -->
