@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @vite('resources/css/app.css')
 
   <title>Mengelola Informasi tanaman</title>
@@ -62,7 +63,7 @@
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
               </li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -271,18 +272,20 @@
   <!-- Modal Hapus -->
   
   <!-- Modal Hapus -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if(session('success'))
-<script>
-    Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "{{ session('success') }}",
-            showConfirmButton: false,
-            timer: 1500
-        });
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var success = "{{ Session::get('success') }}";
+        if(success) {
+            Swal.fire({
+                title: "Berhasil!",
+                text: success,
+                icon: "success",
+                draggable: true
+            });
+        }
+    });
 </script>
-@endif
 
 
 </body>

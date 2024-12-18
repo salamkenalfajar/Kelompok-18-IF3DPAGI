@@ -66,21 +66,25 @@
           </a>
           <!-- modal info -->
           <dialog id="my_modal_tanaman{{$tanaman->Id_Tanaman}}" class="modal">
-    <div class="max-h-[50rem] overflow-y-auto w-full max-w-7xl bg-transparent shadow-none rounded-3xl">
-    <img class="w-full max-h-96 object-cover" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
-      <div class="bg-white px-5 ">
-        <p class="py-4 text-center font-bold text-2xl">{{$tanaman->Nama}}</p>
-        <p class="py-4 text-left text-xl">{{$tanaman->Deskripsi}}</p>
-        <div class="modal-action py-5">
-          <form method="dialog">
-            <!-- if there is a button, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
-        </div>
-      </div>
+            <div class="h-full overflow-y-hidden bg-transparent border-2 rounded-3xl w-full max-w-2xl">
+              <img class="w-full h-96 max-w-2xl object-cover" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
+              <div class="bg-white px-5 w-full">
+                <p class="text-center font-bold 2xl py-2">Deskripsi</p>
+                <p class="text-center text-xl">{{$tanaman->Deskripsi}}</p>
+                <p class="text-center font-bold 2xl py-2 ">Klasifikasi Atau Jenis</p>
+                <p class="text-center text-xl">{{$tanaman->Klasifikasi}}</p>
+                <p class="text-center font-bold 2xl py-2">Penanganan</p>
+                <p class="text-center text-xl">{{$tanaman->Deskripsi}}</p>
+                <div class="modal-action py-5">
+                  <form method="dialog">
+                    <!-- if there is a button, it will close the modal -->
+                    <button class="btn">Close</button>
+                  </form>
+                </div>
+              </div>
 
-    </div>
-  </dialog>
+            </div>
+          </dialog>
   <!-- modal info -->
           @endforeach
           @endif
@@ -116,9 +120,9 @@
         <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
           <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <li><a href="/pricing">Membership</a></li>
+            <!-- <li><a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a></li> -->
             <li>
-              <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+              <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
             </li>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
               @csrf

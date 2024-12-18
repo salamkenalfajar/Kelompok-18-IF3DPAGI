@@ -13,18 +13,18 @@ return new class extends Migration
     {
        Schema::create('infotanaman', function (Blueprint $table) {
         $table->increments('Id_Tanaman');
-        $table->string('Nama', 100)->unique();
+        $table->string('Nama', 255)->unique();
         $table->string('Gambar', 100)->nullable();
-        $table->string('Klasifikasi', 100);
+        $table->string('Klasifikasi', 255);
         $table->text('Deskripsi');
         $table->timestamps();
        });
 
        Schema::create('infohama', function (Blueprint $table) {
         $table->increments('Id_Hama');
-        $table->string('Nama', 100)->unique();
+        $table->string('Nama', 255)->unique();
         $table->string('Gambar', 100)->nullable();
-        $table->string('Klasifikasi', 100);
+        $table->string('Klasifikasi', 255);
         $table->text('Deskripsi');
         $table->timestamps();
        });

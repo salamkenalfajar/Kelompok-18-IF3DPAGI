@@ -62,7 +62,7 @@
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
               </li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -90,27 +90,25 @@
               </tr>
             </thead>
             <tbody>
+            @forelse ($penggunabiasa as $index => $pengguna )
               <!-- row 1 -->
               <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
+                <th>{{$index + 1}}</th>
+                <td><p class="truncate w-40">{{$pengguna->name}}</p></td>
+                <td><p class="truncate w-40">{{$pengguna->email}}</p></td>
+                <td>
+                @if ($pengguna->membership == 'free')
+                <img src="{{ asset('Icon/x.svg') }}">
+                @elseif ($pengguna->membership == 'premium')
+                <img src="{{ asset('Icon/check.svg') }}">
+                @endif
+                </td>
               </tr>
-              <!-- row 2 -->
+              @empty
               <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-              </tr>
-              <!-- row 3 -->
-              <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
+                    <td colspan="4" class="text-center">Tidak ada pengguna biasa.</td>
+                </tr>
+                @endforelse
             </tbody>
           </table>
         </div>

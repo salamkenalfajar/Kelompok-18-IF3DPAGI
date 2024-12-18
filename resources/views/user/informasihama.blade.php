@@ -57,7 +57,7 @@
             
           
           <!-- Card 1 -->
-          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_hama{{ $hama->Nama }}').showModal();">
+          <a class="btn btn-ghost hover:bg-transparent" onclick="document.getElementById('my_modal_hama{{ $hama->Id_Hama }}').showModal();">
             <div class="relative overflow-hidden rounded-lg shadow-lg">
               <img src="{{ asset('uploads/' . $hama->Gambar) }}" alt="Serangga Padi" class="w-screen h-64 object-cover">
               <div class="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-center py-2">
@@ -65,22 +65,28 @@
               </div>
             </div>
           </a>
-          <dialog id="my_modal_hama{{$hama->Nama}}" class="modal">
-    <div class="max-h-[50rem] overflow-y-auto w-full max-w-7xl bg-transparent shadow-none rounded-3xl">
-      <img class="w-full max-h-96 object-cover" src="{{ asset('uploads/' . $hama->Gambar) }}">
-      <div class="bg-white px-5 ">
-        <p class="py-4 text-center font-bold text-2xl">{{$hama->Nama}}</p>
-        <p class="py-4 text-left text-xl">{{$hama->Deskripsi}}</p>
-        <div class="modal-action py-5">
-          <form method="dialog">
-            <!-- if there is a button, it will close the modal -->
-            <button class="btn">Close</button>
-          </form>
-        </div>
-      </div>
+          <!-- Modal -->
+          <dialog id="my_modal_hama{{$hama->Id_Hama}}" class="modal">
+            <div class="max-h-[50rem] overflow-y-hidden bg-transparent border-2 rounded-3xl w-full max-w-2xl">
+              <img class="w-full max-h-96 h-96 max-w-2xl object-cover" src="{{ asset('uploads/' . $hama->Gambar) }}">
+              <div class="bg-white px-5 w-full">
+                <p class="text-center font-bold 2xl py-2">Deskripsi</p>
+                <p class="text-center text-xl">{{$hama->Deskripsi}}</p>
+                <p class="text-center font-bold 2xl py-2 ">Klasifikasi Atau Jenis</p>
+                <p class="text-center text-xl">{{$hama->Klasifikasi}}</p>
+                <p class="text-center font-bold 2xl py-2">Penanganan</p>
+                <p class="text-center text-xl">{{$hama->Deskripsi}}</p>
+                <div class="modal-action py-5">
+                  <form method="dialog">
+                    <!-- if there is a button, it will close the modal -->
+                    <button class="btn">Close</button>
+                  </form>
+                </div>
+              </div>
 
-    </div>
-  </dialog>
+            </div>
+          </dialog>
+  <!-- Modal -->
         @endforeach
         @endif
 
@@ -114,9 +120,9 @@
           <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
             <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-              <li><a href="/pricing">Membership</a></li>
+              <!-- <li><a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a></li> -->
               <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
               </li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

@@ -118,7 +118,9 @@
         <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
           <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <li><a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a></li>
+            <!-- <li>
+              <a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a>
+            </li> -->
             <li>
               <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img class="w-8 h-8" src="{{ asset('Icon/logout.svg') }}">Logout</a>
             </li>

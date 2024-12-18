@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminHamaController;
 use App\Http\Controllers\InformasiTanamanController;
 use App\Http\Controllers\InformasiHamaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\MidtransController;
@@ -25,9 +26,13 @@ Route::post('login', [AuthController::class, 'login_post'])->name('login.post')-
 Route::get('daftar', [AuthController::class, 'daftar'])->name('daftar')->middleware('guest.only');
 Route::post('daftar', [AuthController::class, 'daftar_post'])->name('daftar.post')->middleware('guest.only');
 
+
+
 // Rute untuk admin
 Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin.only');
-Route::get('admin/pengguna', [DashboardController::class, 'pengguna'])->name('admin.pengguna')->middleware('admin.only');
+// Route::get('admin/dashboard', [DashboardController::class, 'informasi'])->name('admin.informasi')->middleware('admin.only');
+Route::get('admin/pengguna', [PenggunaController::class, 'pengguna'])->name('admin.pengguna')->middleware('admin.only');
+Route::get('admin/pengguna', [PenggunaController::class, 'informasi'])->name('admin.informasi')->middleware('admin.only');
 Route::resource('admin/mengelolatanaman', AdminTanamanController::class)->middleware('admin.only');
 Route::resource('admin/mengelolahama', AdminHamaController::class)->middleware('admin.only');
 
@@ -35,12 +40,13 @@ Route::resource('admin/mengelolahama', AdminHamaController::class)->middleware('
 // Route::get('/user/halamandeteksi', [DeteksiTanamanController::class, 'index'])->name('deteksi.index')->middleware('user.only');
 // Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware('user.only');
 Route::get('/user/d', [DeteksiTanamanController::class, 'index'])->name('deteksi.index')->middleware('user.only');
-Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware(['user.only', 'limit.detection']);
+Route::post('/user/d/upload', [DeteksiTanamanController::class, 'upload'])->name('deteksi.upload')->middleware('user.only');
 Route::resource('user/informasitanaman', InformasiTanamanController::class)->middleware('user.only');
 Route::resource('user/informasihama', InformasiHamaController::class)->middleware('user.only');
 Route::post('/payment', [PaymentController::class, 'createTransaction'])->name('payment.create')->middleware('user.only');
 Route::post('/midtrans/notification', [MidtransController::class, 'handleNotification'])->name('midtrans.notification')->middleware('user.only');
 Route::post('/update-subscription', [SubscriptionController::class, 'updateSubscription'])->name('update.subscription')->middleware('user.only');
+
 
 // Logout tanpa middleware
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
