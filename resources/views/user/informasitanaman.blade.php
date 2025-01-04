@@ -18,10 +18,7 @@
       <div class=" flex-1 p-3 ">
         <div class="flex items-center justify-between mb-8 pr-5 pl-1">
           <div class="flex gap-2 items-center justify-center">
-            <a class="btn btn-ghost" href="/pricing">
-              <h1 class="text-2xl font-semibold">Membership</h1>
-              <img class="w-7 h-7 " src="{{ asset('Icon/membership.svg') }}">
-            </a>
+           
           </div>
           <!-- Input Pencarian -->
           <!-- <input type="text" placeholder="search" class="p-2 border rounded-xl shadow-2xl"> -->
@@ -66,15 +63,15 @@
           </a>
           <!-- modal info -->
           <dialog id="my_modal_tanaman{{$tanaman->Id_Tanaman}}" class="modal">
-            <div class="h-full overflow-y-hidden bg-transparent border-2 rounded-3xl w-full max-w-2xl">
-              <img class="w-full h-96 max-w-2xl object-cover" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
+            <div class="max-h-[50rem] overflow-y-hidden bg-transparent border-2 rounded-3xl w-full max-w-2xl">
+              <img class="w-full max-h-96 h-96 max-w-2xl object-cover" src="{{ asset('uploads/' . $tanaman->Gambar) }}">
               <div class="bg-white px-5 w-full">
-                <p class="text-center font-bold 2xl py-2">Deskripsi</p>
-                <p class="text-center text-xl">{{$tanaman->Deskripsi}}</p>
-                <p class="text-center font-bold 2xl py-2 ">Klasifikasi Atau Jenis</p>
-                <p class="text-center text-xl">{{$tanaman->Klasifikasi}}</p>
-                <p class="text-center font-bold 2xl py-2">Penanganan</p>
-                <p class="text-center text-xl">{{$tanaman->Deskripsi}}</p>
+                <p class="text-center font-bold text-2xl py-2">Deskripsi</p>
+                <p class="text-center text-xl mb-4">{{$tanaman->Deskripsi}}</p>
+                <p class="text-center font-bold text-2xl py-2 ">Klasifikasi Atau Jenis</p>
+                <p class="text-center text-xl mb-4">{{$tanaman->Klasifikasi}}</p>
+                <!-- <p class="text-center font-bold 2xl py-2">Penanganan</p>
+                <p class="text-center text-xl">{{$tanaman->Deskripsi}}</p> -->
                 <div class="modal-action py-5">
                   <form method="dialog">
                     <!-- if there is a button, it will close the modal -->
@@ -116,9 +113,11 @@
         </li>
       </ul>
       <div class="dropdown dropdown-top gap-5">
-       <div class="avatar pl-8 pb-4 fixed bottom-0 translate-y-[30rem]">
-        <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
-          <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
+      <div class="avatar pl-8 pb-4 translate-y-[35rem]">
+        <div class=" w-14 rounded-full ring ">
+          <button class="w-full h-full ">
+            <img src="{{ asset('Icon/user-circle.svg') }}" />
+          </button>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
             <!-- <li><a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a></li> -->
             <li>

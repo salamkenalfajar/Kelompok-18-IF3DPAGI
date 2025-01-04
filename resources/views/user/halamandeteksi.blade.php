@@ -113,10 +113,12 @@
           <a class="font-light"><img class="w-7 h-7" src="{{ asset('Icon/icondeteksi.svg') }}">Deteksi</a>
         </li>
       </ul>
-      <div class="dropdown dropdown-top gap-5">
-      <div class="avatar pl-8 pb-4 fixed bottom-0 translate-y-[30rem]">
-        <div class="ring-primary ring-offset-base-100 w-14 rounded-full ring ring-offset-2">
-          <button><img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /></button>
+      <div class="dropdown dropdown-top">
+      <div class="avatar pl-8 pb-4 translate-y-[35rem]">
+        <div class=" w-14 rounded-full ring ">
+          <button class="w-full h-full ">
+            <img src="{{ asset('Icon/user-circle.svg') }}" />
+          </button>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
             <!-- <li>
               <a href="/pricing"><img class="w-8 h-8" src="{{ asset('Icon/money-icon.svg') }}">Membership</a>
@@ -252,59 +254,74 @@
 
                 const result = await response.json();
 
-                if (response.ok) {
-                    Swal.close(); // Tutup loading setelah proses selesai
-                   // Proses hasil deteksi dan formatkan menjadi terstruktur
-                    // const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
-                    resultText.innerHTML = ""; // Kosongkan kontainer hasil sebelumnya
+                // Modifikasi bagian displaySections
+if (response.ok) {
+    Swal.close();
 
-                    resultImage.src = result.image_url; // URL gambar yang diunggah
-                    resultImage.classList.remove('hidden'); // Pastikan gambar terlihat
-                    resultDiv.classList.remove('hidden'); // Tampilkan hasil deteksi
-
-                    // FUngsi untuk menampilkan hasil deteksi dengan efek mengetik
-                    async function displaySections(sections) {
-                      for (const section of sections) {
-                          if (section.trim()) {
-                              const headerEnd = section.indexOf(":");
-                              const header = section.substring(0, headerEnd).trim(); // Header
-                              const content = section.substring(headerEnd + 1).trim(); // Konten
-
-                              //Hapus tanda bintang dari header dan konten
-                              const cleanHeader = header.replace(/\*\*/g, "");
-                              const cleanContent = content.replace(/\*\*/g, "");
-
-                              // Tambahkan header dengan efek mengetik
-                              const headerElement = document.createElement("h3");
-                              headerElement.classList.add( "font-bold", "mb-2", "text-lg");
-                              resultText.appendChild(headerElement);
-
-                              await typeText(headerElement, cleanHeader, 10);
-
-                              // Tambahkan konten dengan efek mengetik
-                              const contentElement = document.createElement("p");
-                              contentElement.classList.add("font-roboto", "text-black", "mb-4", 'font-medium');
-                              resultText.appendChild(contentElement);
-
-                              await typeText(contentElement, cleanContent, 4);
-
-                              // Jeda sebelum menampilkan bagian berikutnya
-                              await new Promise(resolve => setTimeout(resolve, 300));
-                          }
-                      }
-                  }
-
-                // Split hasil berdasarkan "- **" dan tampilkan bagian satu per satu
-                const sections = result.result.split("- **"); // Asumsi setiap bagian diawali dengan "- **"
-                displaySections(sections);
-                    
-                   
-                // Sembunyikan tombol
-                    detectButton.classList.add('hidden');
+    // Sembunyikan tombol
+    detectButton.classList.add('hidden');
                     uploadArea.classList.add('hidden');
                     uploadedPreview.classList.add('hidden');
                     deleteButton.classList.add('hidden');
                     retryButton.classList.remove('hidden');
+                    
+    resultText.innerHTML = "";
+    resultImage.src = result.image_url;
+    resultImage.classList.remove('hidden');
+    resultDiv.classList.remove('hidden');
+
+    // Fungsi tampilkan hasil dengan efek mengetik
+    async function displayResult(data) {
+        // Jenis Tanaman
+        const plantHeader = document.createElement("h3");
+        plantHeader.classList.add("font-bold", "mb-2", "text-lg");
+        resultText.appendChild(plantHeader);
+        await typeText(plantHeader, "Jenis Tanaman:", 10);
+
+        const plantContent = document.createElement("p");
+        plantContent.classList.add("font-roboto", "text-black", "mb-4", "font-medium");
+        resultText.appendChild(plantContent);
+        await typeText(plantContent, data.jenis_tanaman, 4);
+
+        // Kondisi
+        const conditionHeader = document.createElement("h3");
+        conditionHeader.classList.add("font-bold", "mb-2", "text-lg");
+        resultText.appendChild(conditionHeader);
+        await typeText(conditionHeader, "Kondisi:", 10);
+
+        const conditionContent = document.createElement("p");
+        conditionContent.classList.add("font-roboto", "text-black", "mb-4", "font-medium");
+        resultText.appendChild(conditionContent);
+        await typeText(conditionContent, data.kondisi, 4);
+
+        // Tingkat Kepercayaan
+        const confidenceHeader = document.createElement("h3");
+        confidenceHeader.classList.add("font-bold", "mb-2", "text-lg");
+        resultText.appendChild(confidenceHeader);
+        await typeText(confidenceHeader, "Tingkat Prediksi:", 10);
+
+        const confidenceContent = document.createElement("p");
+        confidenceContent.classList.add("font-roboto", "text-black", "mb-4", "font-medium");
+        resultText.appendChild(confidenceContent);
+        await typeText(confidenceContent, data.confidence, 4);
+
+        // Solusi
+        const solutionHeader = document.createElement("h3");
+        solutionHeader.classList.add("font-bold", "mb-2", "text-lg");
+        resultText.appendChild(solutionHeader);
+        await typeText(solutionHeader, "Solusi:", 10);
+
+        const solutionContent = document.createElement("p");
+        solutionContent.classList.add("font-roboto", "text-black", "mb-4", "font-medium");
+        resultText.appendChild(solutionContent);
+        await typeText(solutionContent, data.solusi, 4);
+    }
+
+    // Panggil fungsi dengan data dari hasil
+    await displayResult(result.result);
+                    
+                   
+                
                 } else {
                   //Alert jika terjadi error pada server
                   Swal.fire({

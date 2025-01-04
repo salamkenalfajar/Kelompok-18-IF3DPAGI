@@ -17,7 +17,7 @@
                       <img width="30" src="{{ asset('Icon/image 3.svg') }}" alt="Logo" class="object-contain">
                       
                         <li>
-                            <a href="{{ url('/home') }}" class="nav-link text-gray-600">Home</a>
+                            <a href="{{ url('/') }}" class="nav-link text-gray-600">Home</a>
                         </li>
                         <li>
                             <a href="{{ url('/login') }}" class="nav-link text-gray-600">Login</a>
@@ -61,7 +61,7 @@
                 </form>
             </div>
 
-            <img class="object-contain translate-x-[21rem] absolute" width="447.7" src="{{ asset('Icon/elipse.svg') }}">
+            <img class="object-contain translate-x-[23rem] absolute" width="447.7" src="{{ asset('Icon/elipse.svg') }}">
         </div>
     </div>
     <script>

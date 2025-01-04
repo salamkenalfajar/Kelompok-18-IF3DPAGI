@@ -52,12 +52,12 @@
             <div tabindex="0" role="button" class="flex items-center space-x-3 btn btn-ghost">
               <div class="avatar">
                 <div class="w-10 rounded-full">
-                  <img alt="User Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  <img alt="User Avatar" src="{{ asset('Icon/user-circle.svg') }}" />
                 </div>
               </div>
               <div>
-                <p class="font-bold">Salmon</p>
-                <p class="text-sm font-semibold">Admin</p>
+                <p class="font-bold">Admin</p>
+                <!-- <p class="text-sm font-semibold">Admin</p> -->
               </div>
 
             </div>

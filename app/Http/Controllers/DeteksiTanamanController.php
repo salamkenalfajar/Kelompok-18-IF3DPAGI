@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
+
 class DeteksiTanamanController extends Controller
 {
     /**
@@ -54,7 +55,7 @@ class DeteksiTanamanController extends Controller
         $fullPath = public_path("deteksi/$fileName");
         $response = Http::attach(
             'image', file_get_contents($fullPath), $fileName
-        )->post('http://127.0.0.1:9000/detect'); // URL Flask API
+        )->post('http://127.0.0.1:9001/detect'); // URL Flask API
 
         if ($response->successful()) {
             $result = $response->json();
