@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Konfigurasi API Key Gemini
-GENAI_API_KEY = os.getenv('GEMINI_API_KEY', 'AIzaSyAv7tJN42dBcioFWCEmUKRkVURkXGHtt0s')
+
 genai.configure(api_key=GENAI_API_KEY)
 
 @app.route('/detect', methods=['POST'])
